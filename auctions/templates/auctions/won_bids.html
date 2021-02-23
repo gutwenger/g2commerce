@@ -1,0 +1,52 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <div id="body-block-title">
+        <p>won bids</p>
+    </div>
+    
+    {% if entries %}
+        <div id="active-listings">
+            {% for entry in entries %}
+            <div class="active-listing-container">
+                <a href="{% url 'listing' entry.id  %}" class="active-listing-photo">
+                    <div class="active-listing-photo-container">
+                        <img src="{{ entry.photo.url }}">
+                    </div>
+                </a>
+                <div class="active-listing-name">
+                    <a href="{% url 'listing' entry.id  %}">{{ entry.name }}</a>
+                </div>
+                <div class="active-listing-price">
+                    <div class="active-listing-price-price">
+                        <p class="active-listing-price-current">
+                            {% if entry.current_bid %}
+                                HKD {{ entry.current_bid }}
+                            {% else %}
+                                HKD {{ entry.start_price }}
+                            {% endif %}
+                        </p>
+                        <p class="active-listing-price-label">Original Price:</p>
+                        <p class="active-listing-price-origin">HKD {{ entry.start_price }}</p>
+                    </div>
+                    <div class="active-listing-price-lister">
+                        <p>Listed by:</p>
+                        <a href="">{{ entry.lister }}</a>
+                    </div>
+                    <div class="active-listing-price-category"><a href="{% url 'all_categories' entry.category %}">{{ entry.category }}</a></div>
+                    {% if entry.active == False %}
+                        <div class="active-listing-price-category active-listing-price-category-expired"><a>Expired</a></div>
+                    {% endif %}
+                </div>
+                <div class="active-listing-description">
+                    <p>{{ entry.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="bid_record_message_container">
+            <p>Oops! You haven't won any bids!</p>
+        </div>
+    {% endif %}
+{% endblock %}

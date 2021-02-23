@@ -1,0 +1,28 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <div id="login-container">
+        {% if message %}
+            <div id="bid-container">
+                <div id="bid-container-message" class="bid-unsuccessful">
+                    <p>{{ message }}</p>
+                </div>
+            </div>
+        {% endif %}
+        <p id="login-title">Login</p>
+        <form id="login-form" action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="login-form-input-container">
+                <input class="login-form-textinput" autofocus type="text" name="username" autocomplete="off" required>
+                <label class="login-form-label">Username</label>
+            </div>
+            <div class="login-form-input-container">
+                <input class="login-form-textinput" autofocus type="password" name="password" autocomplete="off" required>
+                <label class="login-form-label">Password</label>
+            </div>
+            <input class="login-form-button" type="submit" value="Login">
+        </form>
+        <p class="login-bottom">Don't have an account? <a href="{% url 'register' %}">Register here.</a></p>
+    </div>
+
+{% endblock %}

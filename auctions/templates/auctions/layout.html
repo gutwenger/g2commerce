@@ -1,0 +1,85 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Auctions{% endblock %}</title>
+        <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/76dadadada.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header>
+            <div id="layout-navbar">
+                <div id="layout-navbar-logo"><a href="{% url 'index' %}">auctions</a></div>
+                <div id="layout-navbar-search">
+                    <form id="layout-navbar-searchbar" method="POST" action="{% url 'search' %}">
+                        {% csrf_token %}
+                        <input type="text" name="search-item" autocomplete="off" required>
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                <a href="{% url 'index' %}" id="layout-navbar-active">
+                    <i class="fas fa-list-ul"></i>
+                    <p>Active<br>Listings</p>
+                </a>
+            </div>
+            {% if user.is_authenticated %}
+            <div id="layout-messagearea" class="layout-messagearea-signed-in">
+                <div class="layout-messagearea-container">
+                    <div id="layout-messagearea-username">
+                        <p class="layout-messagearea-username-welcome">Welcome!</p>
+                        <p class="layout-messagearea-username-display">{{ user.username }}</p>
+                    </div>
+                </div>
+                <div class="layout-messagearea-container">
+                    <a href="{% url 'categories' %}" class="layout-messagearea-items layout-messagearea-items-normal">
+                        <i class="fab fa-buromobelexperte"></i>
+                        <p>Categories</p>
+                    </a>
+                    <a href="{% url 'my_items' %}" class="layout-messagearea-items layout-messagearea-items-normal">
+                        <i class="fas fa-box-open"></i>
+                        <p>My Items</p>
+                    </a>
+                    <a href="{% url 'watchlist' %}" class="layout-messagearea-items layout-messagearea-items-normal">
+                        <i class="fas fa-eye">
+                            {% if watchlist_len != 0 %}
+                            <span>{{ watchlist_len }}</span>
+                            {% endif %}
+                        </i>
+                        <p>Watchlist</p>
+                    </a>
+                    <a href="{% url 'my_bids' %}" class="layout-messagearea-items layout-messagearea-items-normal">
+                        <i class="fas fa-hourglass-half"></i>
+                        <p>My Bids</p>
+                    </a>
+                    <a href="{% url 'won_bids' %}" class="layout-messagearea-items layout-messagearea-items-normal">
+                        <i class="fas fa-check-double">
+                        </i>
+                        <p>Won Bids</p>
+                    </a>
+                    <a href="{% url 'create_listing' %}" class="layout-messagearea-items layout-messagearea-items-normal">
+                        <i class="fas fa-plus"></i>
+                        <p>Create<br>Listing</p>
+                    </a>
+                </div>
+                <div class="layout-messagearea-container">
+                    <a href="{% url 'logout' %}" class="layout-messagearea-items layout-messagearea-items-warning">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <p>Logout</p>
+                    </a>
+                </div>
+            </div>
+            {% else %}
+            <div id="layout-messagearea" class="layout-messagearea-not-signed-in">
+                <p>Not signed in. <a href="{% url 'login' %}">Sign-in</a> or <a href="{% url 'register' %}">Register</a></p>
+            </div>
+            {% endif %}
+        </header>
+        <main>
+            <div id="body-container">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </main>
+    </body>
+</html>

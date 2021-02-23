@@ -1,0 +1,197 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% if entry.removed == True %}
+        <div id="bid-container">
+            <div id="bid-container-message" class="bid-unsuccessful">
+                <p>This item has been removed from owner!</p>
+            </div>
+        </div>
+    {% elif entry.active == False and bid_winner == user %}
+        <div id="bid-container">
+            <div id="bid-container-message" class="bid-successful">
+                <p>You win the bid!</p>
+            </div>
+        </div>
+    {% endif %}
+    <div id="listing-container">
+        {% if error %}
+        <div id="listing-container-error-cointainer">
+            <h1>404</h1>
+            <p>not found</h2>
+        </div>
+        {% else %}
+        <div id="listing-container-item">
+            <div id="listing-container-item-container">
+                <div id="listing-container-item-container-photo">
+                    <img src="{{ entry.photo.url }}">
+                </div>
+                <div id="listing-container-item-details">
+                    <p class="listing-container-item-label">Item Name: </p>
+                    <div class="listing-container-item-name">
+                        <p>{{ entry.name }}</p>
+                    </div>
+                    <p class="listing-container-item-label">Item Description: </p>
+                    <div class="listing-container-item-description">
+                        <p>{{ entry.description }}</p>
+                    </div>
+                    <div class="listing-container-item-listerdate">
+                        <div class="listing-container-item-listerdate-sub">
+                            <p class="listing-container-item-listerdate-label">Owner:</p>
+                            <a href="{% url 'all_user_items' entry.lister %}" class="listing-container-item-listerdate-detail">{{ entry.lister }}</a>
+                        </div>
+                        <div class="listing-container-item-listerdate-sub">
+                            <p class="listing-container-item-listerdate-label">List Date:</p>
+                            <p class="listing-container-item-listerdate-detail">{{ entry.start_date }}</p>
+                        </div>
+                    </div>
+                    {% if user.is_authenticated %}
+                        {% if entry.removed == True %}
+                            <p class="listing-container-item-label">Current status: </p>
+                            <div class="listing-container-item-price" style="background-color: red; color: white">
+                                <p>removed</p>
+                            </div>
+                        {% elif entry.active == True %}
+                            {% if entry.lister == user %}
+                                <div id="listing-container-lister">
+                                    <div id="listing-container-lister-current" class="listing-container-lister-box">
+                                        <p class="listing-container-lister-box-label">Current Price:</p>
+                                        <p class="listing-container-lister-box-price">
+                                        {% if bid_info.bid_price %}
+                                            HKD {{ bid_info.bid_price }}
+                                        {% else %}
+                                            HKD {{ entry.start_price }}
+                                        {% endif %}
+                                        </p>
+                                    </div>
+                                    <div id="listing-container-lister-start" class="listing-container-lister-box">
+                                        <p class="listing-container-lister-box-label">Start Price:</p>
+                                        <p class="listing-container-lister-box-price">HKD {{ entry.start_price }}</p>
+                                    </div>
+                                    <div id="listing-container-lister-profit" class="listing-container-lister-box">
+                                        <p class="listing-container-lister-box-label">Profit:</p>
+                                        <p class="listing-container-lister-box-price">
+                                            {% if profit %}
+                                                HKD {{ profit }}
+                                            {% else %}
+                                                HKD 0.0
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <form id="listing-container-lister-form" method="POST" action="{% url 'end_bid' %}">
+                                        {% csrf_token %}
+                                        <input id="remove-listing" type="radio" name="lister_action" value="remove_bid" required>
+                                        <label id="remove-listing-label" for="remove-listing"><i class="far fa-trash-alt"></i><p>Remove</p></label>
+                                        <input id="end-bid" type="radio" name="lister_action" value="close_bid">
+                                        <label id="end-bid-label" for="end-bid"><i class="far fa-check-circle"></i><p>Close Bid</p></label>
+                                        <button id="listing-container-lister-form-submit" type="submit" name="item_id" value="{{ entry.id }}"><i class="fas fa-check"></i> Click to confirm</button>
+                                    </form>
+                                </div>
+                            {% else %}
+                                <p class="listing-container-item-label">Current Price & Bid: </p>
+                                <div id="listing-container-pricing" class="listing-container-pricing-hover">
+                                    <div class="listing-container-pricing-price">
+                                        {% if bid_info %}
+                                            <p>HKD {{ bid_info.bid_price }}</p>
+                                        {% else %}
+                                            <p>HKD {{ entry.start_price }}</p>
+                                        {% endif %}
+                                        {% if bid_info.bidder == user %}
+                                            <span>(You are the highest bidder.)</span>
+                                        {% endif %}
+                                    </div>
+                                    {% if watchlist %}
+                                        <form id="listing-container-pricing-watchlistform" action="{% url 'watchlist' %}" method="POST">
+                                            {% csrf_token %}
+                                            <button id="listing-container-pricing-watchlist-remove" class="listing-container-pricing-button" type="submit" value="{{ entry.id }}" name="item">
+                                                <i class="far fa-eye-slash"></i>
+                                                <p>remove</p>
+                                            </button>
+                                        </form>
+                                    {% else %}
+                                        <form id="listing-container-pricing-watchlistform" action="{% url 'watchlist' %}" method="POST">
+                                            {% csrf_token %}
+                                            <button id="listing-container-pricing-watchlist-remove" class="listing-container-pricing-button" type="submit" value="{{ entry.id }}" name="item">
+                                                <i class="far fa-eye"></i>
+                                                <p>watchlist</p>
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                    <label id="listing-container-pricing-bid" class="listing-container-pricing-button" for="listing-container-pricing-bidbox-checkbox">
+                                        <i class="fas fa-comment-dollar"></i>
+                                        <p>Bid</p>
+                                    </label>
+                                    <input type="checkbox" id="listing-container-pricing-bidbox-checkbox">
+                                    <form id="listing-container-pricing-bidbox" action="{% url 'bid' %}" method="POST">
+                                    {% csrf_token %}
+                                        <input type="number" name="bid_price" required>
+                                        <button type="submit" name="item_id" value="{{ entry.id }}">bid <i class="fas fa-check"></i></button>
+                                    </form>
+                                </div>
+                                <p class="listing-container-item-label">Start Price: HKD {{ entry.start_price }}</p>
+                            {% endif %}
+                        {% else %}
+                            <div id="listing-container-closed">
+                                <h3>Bid closed!</h3>
+                                <p class="listing-container-closed-label">Closed price</p>
+                                <p class="listing-container-closed-price">HKD {{ bid_info.bid_price }}</p>
+                                {% if watchlist == True %}
+                                    <form action="{% url 'watchlist' %}" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" name="item" value="{{ entry.id }}"><i class="far fa-trash-alt"></i> Remove from watchlist</button>
+                                    </form>
+                                {% elif user == entry.lister %}
+                                    <p class="listing-container-closed-label">Winner</p>
+                                    <p class="listing-container-closed-price">{{ bid_info.bidder }}</p>
+                                {% else %}
+                                    <p class="listing-container-closed-label">Start price</p>
+                                    <p class="listing-container-closed-price">HKD {{ entry.start_price }}</p>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <p class="listing-container-item-label">Current Price: </p>
+                        <div class="listing-container-item-price">
+                            {% if bid_info %}
+                                <p>HKD {{ bid_info.bid_price }}</p>
+                            {% else %}
+                                <p>HKD {{ entry.start_price }}</p>
+                            {% endif %}
+                        </div>
+                        <p class="listing-container-item-label">Start Price: HKD {{ entry.start_price }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div id="listing-container-item-comment">
+                <div id="listing-container-item-title">
+                    <p>Comments</p>
+                </div>
+                {% if comments %}
+                    {% for comment in comments %}
+                        <div class="listing-container-item-comment">
+                            <div class="listing-container-item-user">
+                                <p>by <a href="">{{ comment.user }}</a></p>
+                                <p>{{ comment.time }}</p>
+                            </div>
+                            <div class="listing-container-item-detail">
+                                <p>{{ comment.comments}}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div id="listing-container-item-comment-none">
+                        <p>This item has no comment, yet.</p>
+                    </div>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <form id="listing-container-item-comment-form" action="{% url 'comment' %}" method="POST">
+                        {% csrf_token %}
+                        <textarea name="comment"></textarea>
+                        <button type="submit" name="item_id" value="{{ entry.id }}">Submit comment</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

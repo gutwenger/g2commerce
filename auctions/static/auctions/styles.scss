@@ -1,0 +1,1509 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #f8f8f8;
+    display: grid;
+    grid-template-rows: 130px 1fr;
+
+    header {
+        #layout-navbar {
+            height: 80px;
+            width: 100vw;
+            background-color: #364958;
+            display: grid;
+            grid-template-columns: 200px 1fr 170px;
+    
+            #layout-navbar-logo {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+    
+                a {
+                    text-decoration: none;
+                    color: white;
+                    margin: 0;
+                    font-size: 50px;
+                    font-weight: bolder;
+                    letter-spacing: -5px;
+                    transition: 0.5s;
+                }
+            }
+
+            #layout-navbar-logo a:hover {
+                color: #FCA311;
+                transition: 0.5s;
+            }
+    
+            #layout-navbar-search {
+                height: 80px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+    
+                form {
+                    height: 50px;
+                    width: 100%;
+                    background-color: white;
+                    border: 1px solid lightgray;
+                    border-radius: 100px;
+                    display: grid;
+                    grid-template-columns: 1fr 70px;
+    
+                    input {
+                        height: 50px;
+                        width: 100%;
+                        background-color: transparent;
+                        box-sizing: border-box;
+                        border: none;
+                        font-size: 20px;
+                        padding: 0 20px;
+                    }
+    
+                    input:focus {
+                        outline: none;
+                    }
+    
+                    button {
+                        background-color: transparent;
+                        border: none;
+                        color: darkgrey;
+                        transition: 1s;
+                    }
+    
+                    button:hover {
+                        color: #FCA311;
+                        font-size: 30px;
+                        transition: 1s ;
+                    }
+                }
+    
+                form:hover {
+                    box-shadow: 2px 2px 20px lightgray;
+                }
+    
+                form:focus-within {
+                    border: 1px solid #FCA311;
+    
+                    button {
+                        font-size: 30px;
+                        transition: 1s;
+                        color: #FCA311;
+                    }
+                }
+    
+            }
+    
+            #layout-navbar-active {
+                text-decoration: none;
+                color: white;
+                margin: auto;
+                padding: 3px 10px 3px 20px;
+                border-radius: 25px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: 1s;
+    
+                i {
+                    font-size: 35px;
+                }
+    
+                p {
+                    font-weight: bolder;
+                    padding: 10px;
+                }
+            }
+    
+            #layout-navbar-active:hover {
+                background-color: #FCA311;
+                color: black;
+                transition: 1s;
+            }
+        }
+    
+        #layout-messagearea {
+            height: 50px;
+            width: 100vw;
+            font-family: Arial, Helvetica, sans-serif;
+    
+            p {
+                width: 100%;
+                font-size: 13px;
+                font-weight: bolder;
+            }
+        }
+    
+        .layout-messagearea-signed-in {
+            background-color: #fbfbf2;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid lightgray;
+
+            .layout-messagearea-container {
+                width: auto;
+                display: flex;
+                
+                #layout-messagearea-username {
+                    width: auto;
+                    text-align: left;
+                    padding: 0 50px 0 20px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    transition: 0.5s;
+
+                    .layout-messagearea-username-welcome {
+                        font-size: 12px;
+                    }
+
+                    .layout-messagearea-username-display {
+                        font-size: 25px;
+                        color: #c44536;
+                    }
+                }
+                
+                .layout-messagearea-items {
+                    padding: 0 20px;
+                    width: auto;
+                    text-decoration: none;
+                    color: black;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+
+                    i {
+                        text-align: center;
+                        width: 50px;
+                        font-size: 25px;
+                        padding-right: 5px;
+                    }
+
+                    p {
+                        display: none;
+                    }
+                }
+
+                #layout-messagearea-username:hover {
+                    background-color: rgba(252, 162, 17, 0.507);
+                    transition: 0.5s;
+                }
+
+                .layout-messagearea-items:hover {
+                    i {
+                        font-size: 15px;
+                        transition: 0.5s;
+                    }
+
+                    p {
+                        font-size: 20px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        z-index: 100;
+                        animation: navbarText 0.5s;
+                    }
+
+                    @keyframes navbarText {
+                        0% {
+                            opacity: 0;
+                        }
+                        50% {
+                            opacity: 0;
+                        }
+                        100% {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+
+            .layout-messagearea-items {
+                padding: 0 20px;
+                width: auto;
+                text-decoration: none;
+                color: black;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+
+                i {
+                    text-align: center;
+                    width: 50px;
+                    font-size: 25px;
+                    padding-right: 5px;
+                    position: relative;
+
+                    span {
+                        position: absolute;
+                        height: 18px;
+                        width: 18px;
+                        border-radius: 50px;
+                        bottom: 2px;
+                        right: 2px;
+                        color: white;
+                        background-color: #ff006e;
+                        font-size: 13px;
+                        font-family: Arial, Helvetica, sans-serif;
+                        font-weight: bolder;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+
+                p {
+                    display: none;
+                }
+            }
+            .layout-messagearea-items-normal:hover {
+                border-bottom: 3px solid rgba(252, 162, 17, 0.507);
+            }
+
+            .layout-messagearea-items-warning {
+                transition: 0.5s;
+            }
+
+            .layout-messagearea-items-warning:hover {
+                transition: 0.5s;
+                border: none;
+                background-color: #ff005586;
+            }
+            
+        }
+    
+        .layout-messagearea-not-signed-in {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f25c54;
+            color: white;
+            
+            p {
+                text-align: center;
+            }
+
+            a {
+                color: white;
+            }
+        }
+    }
+
+    main {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        overflow-y: scroll;
+
+        #body-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+    
+            /* index.html */
+            #body-block-title {
+                height: 80px;
+                width: 100%;
+                max-width: 1000px;
+                border-bottom: 1px solid lightgray;
+
+                p {
+                    font-size: 35px;
+                    font-weight: bolder;
+                    padding: 20px;
+                    letter-spacing: -1px;
+                }
+            }
+
+            #active-listings {
+                height: 100%;
+                width: 1000px;
+                font-family: Arial, Helvetica, sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .search-yoursearch-container {
+                    width: 100%;
+
+                    p {
+                        font-size: 13px;
+                        color: gray;
+                        padding-left: 20px;
+                    }
+                }
+
+                .search-error {
+                    height: 100%;
+                    width: 100%;
+                    font-weight: bolder;
+                    color: #ff006e;
+                    text-align: center;
+                    padding-top: 50px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    h1 {
+                        font-size: 150px;
+                        letter-spacing: -5px;
+                        padding: 0 15px;
+                    }
+
+                    h1::selection {
+                        background-color: #ff006e;
+                        color: white;
+                    }
+
+                    .search-error-p {
+                        width: auto;
+
+
+                        p {
+                            background-color: #ff006e;
+                            color: white;
+                            font-size: 30px;
+                            letter-spacing: 5px;
+                            padding: 0 15px;
+                        }
+
+                        p::selection {
+                            background-color: #FCA311;
+                            color: white;
+                        }
+                    }
+                }
+
+                .active-listing-container {
+                    border-bottom: 1px solid lightgray;
+                    height: 250px;
+                    width: 90%;
+                    margin: 10px;
+                    display: grid;
+                    grid-template-columns: 250px 1fr 1fr;
+                    grid-template-rows: 50px 1fr;
+                    grid-template-areas:
+                        "photo name name"
+                        "photo price description";
+
+                    .active-listing-photo {
+                        grid-area: photo;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        .active-listing-photo-container {
+                            height: 220px;
+                            width: 220px;
+                            border: 1px solid lightgray;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+
+                            img {
+                                max-height: 220px;
+                                max-width: 220px;
+                            }
+                        }
+                    }
+
+                    .active-listing-name {
+                        grid-area: name;
+                        margin: auto 0;
+
+                        a {
+                            text-decoration: none;
+                            color: black;
+                            font-weight: bolder;
+                        }
+                    }
+
+                    .active-listing-price {
+                        grid-area: price;
+
+                        p {
+                            color: rgb(150, 150, 150);
+                        }
+
+                        .active-listing-price-current {
+                            font-size: 35px;
+                            font-weight: bolder;
+                            color: black;
+                        }
+
+                        .active-listing-price-label {
+                            font-size: 12px;
+                        }
+
+                        .active-listing-price-origin {
+                            font-size: 15px;
+
+                            span {
+                                font-size: 20px;
+                                font-weight: bolder;
+                                color: green;
+                            }
+                        }
+
+                        .active-listing-price-lister {
+                            margin-top: 10px;
+                            font-size: 12px;
+
+                            a {
+                                text-decoration: none;
+                                color: black;
+                                font-size: 15px;
+                                font-weight: bolder;
+                                cursor: pointer;
+                            }
+                        }
+
+                        .active-listing-price-category {
+                            display: flex;
+                            padding: 0px;
+                            margin-top: 10px;
+
+                            a { 
+                                text-decoration: none;
+                                color: black;
+                                display: flex;
+                                align-items: center;
+                                width: auto;
+                                font-size: 13px;
+                                font-weight: bolder;
+                                padding: 2px 5px;
+                                background-color: none;
+                                border: 1px solid lightgray;
+                            }
+
+                            a:hover {
+                                background-color: rgba(252, 162, 17, 0.507);
+                            }
+                        }
+
+                        .active-listing-price-category-expired {
+                            a {
+                                background-color: red;
+                                color: white;
+                            }
+                            a:hover {
+                                background-color: red;
+                            }
+                        }
+                    }
+
+                    .active-listing-description {
+                        grid-area: description;
+
+                        p {
+                            padding: 0 10px;
+                            text-align: justify;
+                            font-size: 13px;
+                            color: rgb(150, 150, 150);
+                        }
+                    }
+
+                }
+
+            }
+
+            /* register.html */
+            #register-container {
+                width: 100%;
+                max-width: 500px;
+                font-family: Arial, Helvetica, sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                
+                #register-title {
+                    margin: 50px 0 20px;
+                    font-size: 35px;
+                    font-weight: bolder;
+                    text-align: center;
+                }
+
+                #register-form {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    .register-form-input-container {
+                        border-bottom: 1px solid rgb(138, 138, 138);
+                        height: 50px;
+                        width: 70%;
+                        margin: 5px 0;
+                        position: relative;
+                        transition: 0.5s;
+    
+                        label {
+                            position: absolute;
+                            bottom: 0;
+                            padding: 5px;
+                            z-index: -10;
+                            transition: 0.5s;
+                            color: rgb(120, 120, 120);
+                        }
+    
+                        .register-form-textinput {
+                            position: absolute;
+                            bottom: 0;
+                            height: 20px;
+                            width: 100%;
+                            background-color: transparent;
+                            border: none;
+                            padding: 5px;
+                            font-size: 20px;
+                            font-weight: bolder;
+                        }
+    
+                        .register-form-textinput:focus {
+                            outline: none;
+                        }
+                    }
+    
+                    .register-form-input-container:focus-within {
+                        transition: 0.5s;
+    
+                        label {
+                            bottom: 25px;
+                            font-size: 13px;
+                            transition: 0.5s;
+                        }
+                    }
+    
+                    .register-form-textinput:valid + .register-form-label {
+                        font-size: 13px;
+                        bottom: 25px;
+                    }
+
+                    .register-form-button {
+                        height: 50px;
+                        width: 70%;
+                        font-size: 20px;
+                        font-weight: bolder;
+                        margin: 50px 0;
+                        background-color:rgba(252, 162, 17, 0.507);
+                        border:none;
+                        cursor: pointer;
+                    }
+
+                    .register-form-button:hover {
+                        background-color: rgb(189, 252, 17);
+                    }
+                }
+
+                .register-bottom {
+                    font-size: 15px;
+                    font-weight: bolder;
+                }
+
+            }
+
+            /* login.html */
+            #login-container {
+                width: 100%;
+                max-width: 500px;
+                font-family: Arial, Helvetica, sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                
+                #login-title {
+                    margin: 50px 0 20px;
+                    font-size: 35px;
+                    font-weight: bolder;
+                    text-align: center;
+                }
+
+                #login-form {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    .login-form-input-container {
+                        border-bottom: 1px solid rgb(138, 138, 138);
+                        height: 50px;
+                        width: 70%;
+                        margin: 5px 0;
+                        position: relative;
+                        transition: 0.5s;
+    
+                        label {
+                            position: absolute;
+                            bottom: 0;
+                            padding: 5px;
+                            z-index: -10;
+                            transition: 0.5s;
+                            color: rgb(120, 120, 120);
+                        }
+    
+                        .login-form-textinput {
+                            position: absolute;
+                            bottom: 0;
+                            height: 20px;
+                            width: 100%;
+                            background-color: transparent;
+                            border: none;
+                            padding: 5px;
+                            font-size: 20px;
+                            font-weight: bolder;
+                        }
+    
+                        .login-form-textinput:focus {
+                            outline: none;
+                        }
+                    }
+    
+                    .login-form-input-container:focus-within {
+                        transition: 0.5s;
+    
+                        label {
+                            bottom: 25px;
+                            font-size: 13px;
+                            transition: 0.5s;
+                        }
+                    }
+    
+                    .login-form-textinput:valid + .login-form-label {
+                        font-size: 13px;
+                        bottom: 25px;
+                    }
+
+                    .login-form-button {
+                        height: 50px;
+                        width: 70%;
+                        font-size: 20px;
+                        font-weight: bolder;
+                        margin: 50px 0;
+                        background-color:rgba(252, 162, 17, 0.507);
+                        border:none;
+                        cursor: pointer;
+                    }
+
+                    .login-form-button:hover {
+                        background-color: rgb(189, 252, 17);
+                    }
+                }
+
+                .login-bottom {
+                    font-size: 15px;
+                    font-weight: bolder;
+                }
+
+            }
+
+            /* create_listing.html */
+            #create-listing-container {
+                height: 100%;
+                width: 1000px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                #create-listing-title {
+                    height: 80px;
+                    width: 100%;
+                    border-bottom: 1px solid lightgray;
+
+                    p {
+                        font-size: 35px;
+                        font-weight: bolder;
+                        padding: 20px;
+                        letter-spacing: -1px;
+                    }
+                }
+
+                #create-listing-form {
+                    height: auto;
+                    width: 100%;
+                    background-color: white;
+                    padding: 10px 20px;
+                    box-sizing: border-box;
+                    font-family: Arial, Helvetica, sans-serif;
+
+                    .create-listing-form-container {
+                        margin-top: 10px;
+                        display: grid;
+                        grid-template-columns: 300px 1fr;
+
+                        label {
+                            display: flex;
+                            align-items: center;
+                            font-size: 13px;
+                        }
+                        
+                        input, select {
+                            height: 30px;
+                            padding: 0 10px;
+                            border: 1px solid gray;
+                        }
+                        
+                        input:focus, select:focus, textarea:focus {
+                            outline: none;
+                            border: 1px solid #FCA311;
+                        }
+
+                        .create-listing-form-upload {
+                            border: none;
+                            padding: 0;
+                        }
+
+                        textarea {
+                            height: 100px;
+                            padding: 10px;
+                            border: 1px solid gray;
+                            font-family: Arial, Helvetica, sans-serif;
+                            resize: none;
+                        }
+
+                    }
+
+                    .create-listing-form-submit {
+                        height: 50px;
+                        font-size: 50px;
+                    }
+
+                    .create-listing-form-container-all {
+                        display: flex;
+                        justify-content: center;
+
+                        button {
+                            height: auto;
+                            font-size: 20px;
+                            font-weight: bolder;
+                            margin: 20px;
+                            padding: 10px 35px;
+                            background-color: rgba(252, 162, 17, 0.507);
+                            border: none;
+                            cursor: pointer;
+                            transition: 0.5s;
+                        }
+
+                        button:hover {
+                            background-color: rgb(189, 252, 17);
+                            transition: 0.5s;
+                        }
+                    }
+                }
+            }
+
+            /* categories.html */
+            #categories-container {
+                height: auto;
+                width: 1000px;
+                font-family: Arial, Helvetica, sans-serif;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+
+                .categories-item {
+                    height: 100px;
+                    width: 200px;
+                    margin: 10px;
+                    background-color: rgb(231, 231, 231);
+                    border-radius: 5px;
+                    box-shadow: 2px 2px 10px gray;
+                    text-decoration: none;
+                    color: black;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    p {
+                        font-weight: bolder;
+                    }
+                }
+
+                .categories-item:hover {
+                    background-color: white;
+                }
+
+            }
+
+            /* won_bids.html */
+            .bid_record_message_container {
+                height: 100%;
+                width: 1000px;
+
+                p {
+                    font-size: 25px;
+                    font-weight: bolder;
+                    font-family: Arial, Helvetica, sans-serif;
+                    text-align: center;
+                    color: #ff006e;
+                    margin-top: 100px;
+                }
+            }
+        }
+
+        /* listing.html */
+        #listing-container {
+            height: 100%;
+            width: 1000px;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            #listing-container-error-cointainer {
+                height: 100%;
+                width: 100%;
+                font-weight: bolder;
+                color: #ff006e;
+                text-align: center;
+
+                h1 {
+                    font-size: 200px;
+                    margin-top: 100px;
+                }
+
+                p {
+                    font-size: 50px;
+                    letter-spacing: 5px;
+                }
+
+            }
+
+            #listing-container-item {
+                height: 100%;
+                width: 100%;
+                border: none;
+
+                #listing-container-item-container {
+                    height: 500px;
+                    margin-top: 30px;
+                    display: grid;
+                    grid-template-columns: 500px 1fr;
+                    grid-template-areas: 
+                        "photo detail";
+
+                    #listing-container-item-container-photo {
+                        grid-area: photo;
+                        height: 500px;
+                        width: 500px;
+                        background-color: white;
+                        border: 1px solid lightgray;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        img {
+                            max-height: 500px;
+                            max-width: 500px;
+                        }
+                    }
+
+                    #listing-container-item-details {
+                        grid-area: detail;
+                        box-sizing: border-box;
+                        padding: 0 20px;
+
+                        .listing-container-item-label {
+                            padding: 5px 0;
+                            font-size: 13px;
+                            color: gray;
+                        }
+
+                        .listing-container-item-name {
+                            height: auto;
+                            max-height: 100px;
+                            box-sizing: border-box;
+                            padding: 10px;
+                            background-color: white;
+
+                            p {
+                                font-size: 20px;
+                                font-weight: bolder;
+                            }
+                        }
+
+                        .listing-container-item-price {
+                            height: auto;
+                            max-height: 100px;
+                            box-sizing: border-box;
+                            padding: 10px;
+                            background-color: white;
+
+                            p {
+                                text-align: center;
+                                font-size: 25px;
+                                font-weight: bolder;
+                            }
+                        }
+
+                        .listing-container-item-description {
+                            max-height: 125px;
+                            box-sizing: border-box;
+                            padding: 10px;
+                            background-color: white;
+                            overflow-y: scroll;
+
+                            p {
+                                font-size: 15px;
+                            }
+                        }
+
+                        .listing-container-item-listerdate {
+                            height: 50px;
+                            margin-bottom: 5px;
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+
+                            .listing-container-item-listerdate-sub {
+                                height: 50px;
+                                margin: 5px;
+                                display: flex;
+                                flex-direction: column;
+
+                                .listing-container-item-listerdate-label {
+                                    height: 20px;
+                                    font-size: 13px;
+                                    color: gray;
+                                }
+
+                                .listing-container-item-listerdate-detail {
+                                    width: 100%;
+                                    height: 30px;
+                                    font-weight: bolder;
+                                    background-color: white;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
+
+                                a {
+                                    text-decoration: none;
+                                    color: black;
+                                }
+                            }
+                        }
+
+                        #listing-container-pricing {
+                            height: auto;
+                            width: 100%;
+                            background-color: #fca311;
+                            border-radius: 5px;
+                            display: grid;
+                            grid-template-columns: 1fr 100px 100px;
+                            grid-template-areas:
+                                "price watch bid"
+                                "bidbox bidbox bidbox";
+
+                            .listing-container-pricing-price {
+                                grid-area: price;
+                                height: 60px;
+                                box-sizing: border-box;
+                                background-color: white;
+                                border-radius: 5px;
+                                margin: 5px;
+                                padding: 10px;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+
+                                p {
+                                    font-size: 25px;
+                                    font-weight: bolder;
+                                }
+
+                                span {
+                                    font-size: 13px;
+                                    font-weight: bolder;
+                                }
+                            }
+
+                            #listing-container-pricing-watchlist {
+                                grid-area: watch;
+                            }
+
+                            #listing-container-pricing-watchlistform {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+
+                            #listing-container-pricing-bid {
+                                gird-area: bid;
+                            }
+
+                            .listing-container-pricing-button {
+                                background-color: transparent;
+                                border: none;
+                                cursor: pointer;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+
+                                i {
+                                    font-size: 50px;
+                                }
+
+                                p {
+                                    display: none;
+                                }
+                            }
+
+                            .listing-container-pricing-button:hover {
+                                i {
+                                    font-size: 25px;
+                                    padding-bottom: 0px;
+                                    transition: 0.5s;
+                                }
+
+                                p {
+                                    display: block;
+                                    font-size: 17px;
+                                    font-weight: bolder;
+                                    transition: 0.5s;
+                                }
+                            }
+
+                            #listing-container-pricing-bidbox-checkbox {
+                                display: none;
+                            }
+
+                            #listing-container-pricing-bidbox {
+                                grid-area: bidbox;
+                                height: 0px;
+                                background-color: #50514f;
+                                border-radius: 0 0 5px 5px;
+                                display: grid;
+                                grid-template-columns: 80% 1fr;
+                                transition: 0.5s;
+
+                                input, button {
+                                    display: none;
+                                }
+
+                                input {
+                                    box-sizing: border-box;
+                                    margin: 7px;
+                                    padding: 10px;
+                                    border-radius: 3px;
+                                    border: none;
+                                }
+
+                                input:focus {
+                                    outline: none;
+                                    border: 1px solid #FCA311;
+                                }
+
+                                button {
+                                    background-color: #ff006e;
+                                    color: white;
+                                    border-radius: 3px;
+                                    border: none;
+                                    margin: 7px 7px 7px 0;
+                                    font-weight: bolder;
+                                    font-size: 15px;
+                                    cursor: pointer;
+                                }
+
+                                button:hover {
+                                    background-color: #f1faee;
+                                    color: black;
+                                }
+                            }
+
+                            #listing-container-pricing-bidbox-checkbox:checked + #listing-container-pricing-bidbox {
+                                height: 50px;
+                                transition: 0.5s;
+
+                                input, button {
+                                    display: block;
+                                    opacity: 0;
+                                    animation: bidAppear 1s forwards;
+
+                                    @keyframes bidAppear {
+                                        0% {
+                                            height: 0;
+                                        }
+                                        100% {
+                                            opacity: 1;
+                                            display: block;
+                                            height: 35px;
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        }
+
+                        #listing-container-lister {
+                            height: 165px;
+                            width: 100%;
+                            margin-top: 20px;
+                            padding: 5px;
+                            border-radius: 10px;
+                            box-sizing: border-box;
+                            background-color: #ffd166;
+                            display: grid;
+                            grid-gap: 5px;
+                            grid-template-columns: 1fr 1fr;
+                            grid-template-rows: repeat(3, 1fr);
+                            grid-template-areas:
+                                "current form"
+                                "startprice form"
+                                "profit form";
+
+                                #listing-container-lister-current {
+                                    grid-area: current;
+                                }
+
+                                #listing-container-lister-start {
+                                    grid-area: startprice;
+                                }
+
+                                #listing-container-lister-profit {
+                                    grid-area: profit;
+                                }
+
+                                #listing-container-lister-form {
+                                    grid-area: form;
+                                    height: 100%;
+                                    width: 100%;
+                                    display: grid;
+                                    grid-template-columns: 1fr 1fr;
+                                    grid-template-rows: 2fr 1fr;
+                                    grid-template-areas:
+                                        "removebutton endbutton"
+                                        "confirmbutton confirmbutton";
+
+                                    input {
+                                        display: none;
+                                    }
+
+                                    label {
+                                        height: 85px;
+                                        width: 85px;
+                                        margin: auto;
+                                        font-weight: bolder;
+                                        border-radius: 200px;
+                                        display: flex;
+                                        flex-direction: column;
+                                        justify-content: center;
+                                        align-items: center;
+                                        cursor: pointer;
+
+                                        i {
+                                            font-size: 50px;
+                                        }
+
+                                        p {
+                                            display: none;
+                                        }
+                                    }
+
+                                    button {
+                                        border: none;
+                                        border-radius: 50px;
+                                        background-color: transparent;
+                                        margin-bottom: 3px;
+                                        font-size: 20px;
+                                        font-weight: bolder;
+                                        cursor: pointer;
+                                    }
+
+                                    label:hover {
+                                        i {
+                                            animation: label_move 1s forwards;
+
+                                            @keyframes label_move {
+                                                100% {
+                                                    font-size: 30px;
+                                                }
+                                            }
+                                        }
+                                        p {
+                                            display: block;
+                                            animation: p_appear 1s forwards;
+
+                                            @keyframes p_appear {
+                                                0% {
+                                                    font-size: 0px;
+                                                }
+                                                100% {
+                                                    font-size: 17px;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    #remove-listing {
+                                        grid-area: removebutton;
+                                    }
+
+                                    #end-bid {
+                                        grid-area: endbutton;
+                                    }
+
+                                    #listing-container-lister-form-submit {
+                                        grid-area: confirmbutton;
+                                    }
+
+                                    input:checked + #remove-listing-label, input:hover + #remove-listing-label {
+                                        background-color: #ff006e;
+                                    }
+
+                                    input:checked + #end-bid-label, input:hover + #end-bid-label {
+                                        background-color: #83e377;
+                                    }
+
+                                    input:checked + button {
+                                        display: none;
+                                    }
+
+                                    button:hover{
+                                        background-color: #003049;
+                                        color: white;
+                                    }
+                                }
+
+                                .listing-container-lister-box-label {
+                                    font-size: 13px;
+                                    text-align: center;
+                                }
+
+                                .listing-container-lister-box-price {
+                                    height: 30px;
+                                    width: 100%;
+                                    box-sizing: border-box;
+                                    border-radius: 25px;
+                                    background-color: white;
+                                    font-size: 20px;
+                                    font-weight: bolder;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
+                        }
+
+                        #listing-container-closed {
+                            height: 165px;
+                            width: 100%;
+                            margin-top: 20px;
+                            padding: 5px;
+                            border-radius: 10px;
+                            box-sizing: border-box;
+                            background-color: #ff006e;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-around;
+                            align-items: center;
+
+                            h3 {
+                                color: white;
+                            }
+
+                            .listing-container-closed-label {
+                                color: white;
+                                font-size: 13px;
+                            }
+
+                            .listing-container-closed-price {
+                                height: 30px;
+                                width: 95%;
+                                font-size: 20px;
+                                font-weight: bolder;
+                                border-radius: 50px;
+                                background-color: white;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+
+                            form {
+                                height: 50px;
+                                width: 100%;
+                                display: flex;
+                                justify-content: center;
+
+                                button {
+                                    width: 95%;
+                                    background-color: #003049;
+                                    border: none;
+                                    border-radius: 50px;
+                                    color: white;
+                                    font-size: 20px;
+                                    font-weight: bolder;
+                                    cursor: pointer;
+                                }
+
+                                button:hover {
+                                    background-color: #1e79aa;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            #listing-container-item-comment {
+                height: auto;
+                margin: 10px 0 60px 0;
+                border: 1px solid lightgray;
+                background-color: white;
+
+                #listing-container-item-title {
+                    margin: 25px 25px 0 25px;
+                    padding-bottom: 5px;
+                    border-bottom: 1px solid lightgray;
+
+                    p {
+                        font-size: 20px;
+                        font-weight: bolder;
+                    }
+                }
+
+                #listing-container-item-comment-form {
+                    height: 100%;
+                    margin: 10px 25px;
+                    display: flex;
+                    flex-direction: column;
+                    
+                    textarea {
+                        height: 100px;
+                        width: 100%;
+                        resize: none;
+                        border: 1px solid lightgray;
+                        padding: 10px;
+                        box-sizing: border-box;
+                        font-size: 20px;
+                        font-family: Arial, Helvetica, sans-serif;
+                    }
+
+                    textarea:focus {
+                        outline: none;
+                        border: 1px solid #fca311;
+                    }
+
+                    button {
+                        padding: 10px 30px;
+                        border: none;
+                        background-color: #ffd166;
+                        font-size: 15px;
+                        font-weight: bolder;
+                        cursor: pointer;
+                    }
+
+                    button:hover {
+                        background-color: #caffbf;
+                    }
+                }
+
+                #listing-container-item-comment-none {
+                    height: 100px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    p {
+                        font-size: 25px;
+                        font-weight: bolder;
+                    }
+                }
+
+                .listing-container-item-comment {
+                    min-height: 150px;
+                    width: 100%;
+                    display: grid;
+                    grid-template-columns: 250px 1fr;
+
+                    .listing-container-item-user {
+                        padding: 25px 30px;
+
+                        p {
+                            font-size: 13px;
+
+                            a {
+                                text-decoration: none;
+                                color: blue;
+                            }
+                        }
+                    }
+
+                    .listing-container-item-detail {
+                        padding: 25px 5px;
+
+                        h3 {
+                            font-size: 15px;
+                            margin-bottom: 10px;
+                        }
+
+                        p {
+                            font-size: 13px;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        /* bid.html */
+        #bid-container {
+            height: 100%;
+            width: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            #bid-container-message {
+                height: 50px;
+                width: 100%;
+                font-weight: bolder;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+            }
+
+            .bid-successful {
+                background-color: #caffbf;
+                color: #494949;
+            }
+
+            .bid-unsuccessful {
+                background-color: #e63946;
+                color: white;
+            }
+
+            #bid-container-return {
+                margin-top: 100px;
+
+                a {
+                    text-decoration: none;
+                    font-weight: bolder;
+                    color: white;
+                    background-color: #364958;
+                    height: 30px;
+                    width: auto;
+                    border-radius: 50px;
+                    padding: 10px 20px;
+                }
+            }
+        }
+    }
+
+
+}
+

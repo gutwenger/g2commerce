@@ -1,0 +1,50 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <div id="create-listing-container">
+        <div id="create-listing-title">
+            <p>create your listing</p>
+        </div>
+        <form id="create-listing-form" method="POST" enctype="multipart/form-data" action="create_listing">
+            {% csrf_token %}
+            <div class="create-listing-form-container">
+                <label>Title:</label>
+                {{ form.name }}
+            </div>
+            <div class="create-listing-form-container" style="display:none">
+                <label>Lister:</label>
+                <input type="text" name="lister" value="{{ user.username }}">
+            </div>
+            <div class="create-listing-form-container">
+                <label>Category:</label>
+                <select name="category">
+                    <option selected disabled>Select a Category</option>
+                    {% for category in categories %}
+                        <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="create-listing-form-container">
+                <label>Start Price:</label>
+                {{ form.start_price }}
+            </div>
+            <div class="create-listing-form-container">
+                <label>Add a Photo:</label>
+                <input class="create-listing-form-upload" type="file" name="photo" accept="image/*" required>
+            </div>
+            <div class="create-listing-form-container">
+                <label>Description:</label>
+                <textarea name="description" autocomplete="off" required></textarea>
+            </div>
+            <div class="create-listing-form-container-all">
+                <button class="create-listing-form-submit" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

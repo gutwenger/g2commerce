@@ -1,0 +1,33 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <div id="register-container">
+
+        <p id="register-title">Create an account</p>
+
+        <form id="register-form" action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <div class="register-form-input-container">
+                <input class="register-form-textinput" autofocus type="text" name="username" autocomplete="off" required>
+                <label class="register-form-label">Username</label>
+            </div>
+            <div class="register-form-input-container">
+                <input class="register-form-textinput" type="text" name="email" autocomplete="off" required>
+                <label class="register-form-label">Email</label>
+            </div>
+            <div class="register-form-input-container">
+                <input class="register-form-textinput" type="password" name="password" autocomplete="off" required>
+                <label class="register-form-label">Password</label>
+            </div>
+            <div class="register-form-input-container">
+                <input class="register-form-textinput" type="password" name="confirmation" autocomplete="off" required>
+                <label class="register-form-label">Confirm Password</label>
+            </div>
+            <input class="register-form-button" type="submit" value="Register">
+        </form>
+
+        <p class="register-bottom">Already have an account? <a href="{% url 'login' %}">Log In here.</a></p>
+    </div>
+
+{% endblock %}

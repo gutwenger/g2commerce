@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <div id="body-block-title">
+        <p>Your bid</p>
+    </div>
+    
+    <div id="bid-container">
+        {% if bid_message == True %}
+            <div id="bid-container-message" class="bid-successful">
+                <p>Bid successful!</p>
+            </div>
+        {% else %}
+            <div id="bid-container-message" class="bid-unsuccessful">
+                <p>Bid failed! Reason: {{ bid_message }}</p>
+            </div>
+        {% endif %}
+        <div id="bid-container-return">
+            <a href="{% url 'listing' item_id %}"><i class="fas fa-undo-alt"></i> Return to item</a>
+        </div>
+    </div>
+{% endblock %}
